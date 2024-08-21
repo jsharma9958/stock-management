@@ -53,60 +53,64 @@ const StockList = () => {
       >
         Stock List for {localStorage.getItem("name")}
       </Typography>
-      <List>
-        {stocks.map((stock) => (
-          <Paper
-            key={stock.sid}
-            elevation={3}
-            sx={{
-              mb: 3,
-              p: 2,
-              backgroundColor: "background.paper",
-              borderRadius: 2,
-            }}
-          >
-            <ListItem>
-              <ListItemText
-                primary={
-                  <Typography variant="h6" sx={{ color: "text.primary" }}>
-                    {stock.company_name}
-                  </Typography>
-                }
-                secondary={
-                  <Box>
-                    <Typography variant="body1">
-                      Quantity: {stock.number}
+      {stocks.length === 0 ? (
+        <Typography>No stocks</Typography>
+      ) : (
+        <List>
+          {stocks.map((stock) => (
+            <Paper
+              key={stock.sid}
+              elevation={3}
+              sx={{
+                mb: 3,
+                p: 2,
+                backgroundColor: "background.paper",
+                borderRadius: 2,
+              }}
+            >
+              <ListItem>
+                <ListItemText
+                  primary={
+                    <Typography variant="h6" sx={{ color: "text.primary" }}>
+                      {stock.company_name}
                     </Typography>
-                    <Typography variant="body1">
-                      Description: {stock.stock_description}
-                    </Typography>
-                    <Typography variant="body1">
-                      Stock Value: Rs.{stock.stock_value.toFixed(2)}
-                    </Typography>
-                    <Typography variant="body1">
-                      Purchased Price: Rs.{stock.purchased_price.toFixed(2)}
-                    </Typography>
-                  </Box>
-                }
-              />
-              <Box sx={{ ml: 2 }}>
-                <IconButton
-                  color="primary"
-                  onClick={() => handleEdit(stock.sid)}
-                >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  color="secondary"
-                  onClick={() => handleDelete(stock.sid)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </Box>
-            </ListItem>
-          </Paper>
-        ))}
-      </List>
+                  }
+                  secondary={
+                    <Box>
+                      <Typography variant="body1">
+                        Quantity: {stock.number}
+                      </Typography>
+                      <Typography variant="body1">
+                        Description: {stock.stock_description}
+                      </Typography>
+                      <Typography variant="body1">
+                        Stock Value: Rs.{stock.stock_value.toFixed(2)}
+                      </Typography>
+                      <Typography variant="body1">
+                        Purchased Price: Rs.{stock.purchased_price.toFixed(2)}
+                      </Typography>
+                    </Box>
+                  }
+                />
+                <Box sx={{ ml: 2 }}>
+                  <IconButton
+                    color="primary"
+                    onClick={() => handleEdit(stock.sid)}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    color="secondary"
+                    onClick={() => handleDelete(stock.sid)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Box>
+              </ListItem>
+            </Paper>
+          ))}
+        </List>
+      )}
     </Container>
   );
 };
